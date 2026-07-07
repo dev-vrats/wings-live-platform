@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   // "CLIENT" or "ADMIN"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientProfile ClientProfile?
+  adminProfile  AdminProfile?
+  jobsPosted    Job[]          @relation("ClientJobs")
+  proposals     Proposal[]
+}
+
+model ClientProfile {
+  id           String @id @default(cuid())
+  userId       String @unique
+  user         User   @relation(fields: [userId], references: [id])
+  businessName String
+  industry     String
+  goals        String
+}
+
+model AdminProfile {
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  user       User    @relation(fields: [userId], references: [id])
+  skills     String  // JSON string or comma-separated list
+  portfolio  String?
+  hourlyRate Int?
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  clientId    String
+  client      User     @relation("ClientJobs", fields: [clientId], references: [id])
+  title       String
+  description String
+  budget      String
+  skills      String   // required skills
+  createdAt   DateTime @default(now())
+  status      String   @default("OPEN") // "OPEN", "CLOSED"
+
+  proposals   Proposal[]
+}
+
+model Proposal {
+  id        String   @id @default(cuid())
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id])
+  adminId   String
+  admin     User     @relation(fields: [adminId], references: [id])
+  coverLetter String
+  price     String
+  createdAt DateTime @default(now())
+}
