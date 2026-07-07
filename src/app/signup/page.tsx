@@ -53,39 +53,42 @@ export default function Signup() {
   return (
     <div style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", padding: "20px" }}>
       <motion.div
-        className="glass-card-static"
-        style={{ width: "100%", maxWidth: "440px", padding: "40px 32px" }}
+        className="bento-card"
+        style={{ width: "100%", maxWidth: "460px", padding: "40px 32px" }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h1 style={{ fontSize: "28px", fontWeight: 700, color: "#fff", marginBottom: "8px", textAlign: "center" }}>
-          Join WINGS
-        </h1>
-        <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)", textAlign: "center", marginBottom: "32px" }}>
-          Create an account to get started
-        </p>
+        <div style={{ textAlign: "center", marginBottom: "32px" }}>
+          <h1 className="font-serif-display" style={{ fontSize: "32px", color: "var(--text-primary)", marginBottom: "8px", letterSpacing: "-0.02em" }}>
+            Join Wings
+          </h1>
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+            Create an account to get started
+          </p>
+        </div>
 
         {error && (
-          <div style={{ background: "rgba(255,0,0,0.1)", border: "1px solid rgba(255,0,0,0.2)", color: "#ff8a8a", padding: "10px", borderRadius: "8px", fontSize: "13px", marginBottom: "20px", textAlign: "center", wordWrap: "break-word" }}>
+          <div style={{ background: "rgba(221, 79, 146, 0.1)", color: "#DD4F92", padding: "12px", borderRadius: "12px", fontSize: "13px", marginBottom: "24px", textAlign: "center", fontWeight: 500 }}>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           
-          <div style={{ display: "flex", gap: "10px", marginBottom: "8px" }}>
+          <div style={{ display: "flex", gap: "8px", marginBottom: "4px", background: "rgba(0,0,0,0.03)", padding: "6px", borderRadius: "9999px" }}>
             <button
               type="button"
               onClick={() => setRole("CLIENT")}
               style={{
                 flex: 1,
-                padding: "12px",
-                borderRadius: "10px",
-                border: role === "CLIENT" ? "1px solid rgba(255,255,255,0.4)" : "1px solid rgba(255,255,255,0.1)",
-                background: role === "CLIENT" ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.02)",
-                color: role === "CLIENT" ? "#fff" : "rgba(255,255,255,0.5)",
+                padding: "10px",
+                borderRadius: "9999px",
+                border: "none",
+                background: role === "CLIENT" ? "#fff" : "transparent",
+                color: role === "CLIENT" ? "var(--text-primary)" : "var(--text-secondary)",
+                boxShadow: role === "CLIENT" ? "0 2px 8px rgba(0,0,0,0.05)" : "none",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 600,
                 cursor: "pointer",
                 transition: "all 200ms ease"
               }}
@@ -97,13 +100,14 @@ export default function Signup() {
               onClick={() => setRole("ADMIN")}
               style={{
                 flex: 1,
-                padding: "12px",
-                borderRadius: "10px",
-                border: role === "ADMIN" ? "1px solid rgba(255,255,255,0.4)" : "1px solid rgba(255,255,255,0.1)",
-                background: role === "ADMIN" ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.02)",
-                color: role === "ADMIN" ? "#fff" : "rgba(255,255,255,0.5)",
+                padding: "10px",
+                borderRadius: "9999px",
+                border: "none",
+                background: role === "ADMIN" ? "#fff" : "transparent",
+                color: role === "ADMIN" ? "var(--text-primary)" : "var(--text-secondary)",
+                boxShadow: role === "ADMIN" ? "0 2px 8px rgba(0,0,0,0.05)" : "none",
                 fontSize: "13px",
-                fontWeight: 500,
+                fontWeight: 600,
                 cursor: "pointer",
                 transition: "all 200ms ease"
               }}
@@ -113,24 +117,24 @@ export default function Signup() {
           </div>
 
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>FULL NAME</label>
-            <input type="text" required className="input-glass" value={name} onChange={(e) => setName(e.target.value)} />
+            <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "8px", letterSpacing: "0.02em" }}>FULL NAME</label>
+            <input type="text" required className="input-pill" value={name} onChange={(e) => setName(e.target.value)} placeholder="Jane Doe" />
           </div>
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>EMAIL</label>
-            <input type="email" required className="input-glass" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "8px", letterSpacing: "0.02em" }}>EMAIL</label>
+            <input type="email" required className="input-pill" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
           </div>
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "rgba(255,255,255,0.5)", marginBottom: "8px" }}>PASSWORD</label>
-            <input type="password" required className="input-glass" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "var(--text-primary)", marginBottom: "8px", letterSpacing: "0.02em" }}>PASSWORD</label>
+            <input type="password" required className="input-pill" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
           </div>
-          <button type="submit" className="btn-primary" style={{ marginTop: "12px" }} disabled={loading}>
+          <button type="submit" className="btn-pill" style={{ marginTop: "12px", padding: "14px" }} disabled={loading}>
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
 
-        <div style={{ marginTop: "24px", textAlign: "center", fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
-          Already have an account? <Link href="/login" style={{ color: "#fff", fontWeight: 500 }}>Sign in</Link>
+        <div style={{ marginTop: "32px", textAlign: "center", fontSize: "14px", color: "var(--text-secondary)" }}>
+          Already have an account? <Link href="/login" style={{ color: "var(--text-primary)", fontWeight: 600, textDecoration: "none" }}>Sign in</Link>
         </div>
       </motion.div>
     </div>
